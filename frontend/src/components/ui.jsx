@@ -1,3 +1,4 @@
+import { forwardRef } from 'react';
 import { cn } from '@/lib/utils';
 import { Loader2, Star } from 'lucide-react';
 
@@ -25,37 +26,37 @@ export function Card({ className, children, ...props }) {
   );
 }
 
-export function Input({ label, error, className, ...props }) {
+export const Input = forwardRef(function Input({ label, error, className, ...props }, ref) {
   return (
     <div>
       {label && <label className="label">{label}</label>}
-      <input className={cn('input', error && 'border-rose-500', className)} {...props} />
+      <input ref={ref} className={cn('input', error && 'border-rose-500', className)} {...props} />
       {error && <p className="mt-1 text-xs text-rose-500">{error}</p>}
     </div>
   );
-}
+});
 
-export function Select({ label, error, className, children, ...props }) {
+export const Select = forwardRef(function Select({ label, error, className, children, ...props }, ref) {
   return (
     <div>
       {label && <label className="label">{label}</label>}
-      <select className={cn('input', error && 'border-rose-500', className)} {...props}>
+      <select ref={ref} className={cn('input', error && 'border-rose-500', className)} {...props}>
         {children}
       </select>
       {error && <p className="mt-1 text-xs text-rose-500">{error}</p>}
     </div>
   );
-}
+});
 
-export function Textarea({ label, error, className, ...props }) {
+export const Textarea = forwardRef(function Textarea({ label, error, className, ...props }, ref) {
   return (
     <div>
       {label && <label className="label">{label}</label>}
-      <textarea className={cn('input min-h-[100px]', error && 'border-rose-500', className)} {...props} />
+      <textarea ref={ref} className={cn('input min-h-[100px]', error && 'border-rose-500', className)} {...props} />
       {error && <p className="mt-1 text-xs text-rose-500">{error}</p>}
     </div>
   );
-}
+});
 
 export function Badge({ className, children }) {
   return <span className={cn('badge', className)}>{children}</span>;
