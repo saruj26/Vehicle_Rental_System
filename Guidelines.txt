@@ -1,0 +1,35 @@
+  ✅ Frontend (React + Vite + Tailwind) — builds clean (2290 modules, 0 errors)
+
+  - 21 pages: Home, Vehicles (search + visual seat filter + advanced filters),
+  VehicleDetail (gallery+zoom, booking widget, reviews, WhatsApp), Compare,
+  single Auth page with role selection, Wishlist, Notifications, Profile,
+  BookingDetail, + Customer/Owner/Admin dashboards with Recharts 
+  - Context API (Auth/Theme/Wishlist), dark+light mode, glassmorphism,
+  skeletons, fully responsive, role-aware navbar & dashboard sidebar
+
+  ✅ Verified end-to-end (live, against a MongoDB container)
+
+  Login→JWT, price quote (math validated: $380 rental + $38 fee + $20.90 tax −
+  $38 promo + $190 deposit = $590.90 ✓), booking creation, RBAC (403
+  customer→admin), wishlist, admin aggregations. 
+
+  📚 Docs: README.md + API.md (full endpoint reference)
+
+  To run:
+  cd backend && npm install && npm run seed && npm run dev      # :5000
+  cd frontend && npm install && npm run dev                     # :5173
+  Demo logins: admin@rental.com / Admin@12345, owner@rental.com / Owner@12345,
+  customer@rental.com / Customer@12345.
+
+  Two notes:
+  - A MongoDB container rental-mongo is still running on :27017 from testing
+  (the .env already points to it with generated JWT secrets). Remove it anytime
+  with docker rm -f rental-mongo.
+  - Image uploads return placeholder URLs until you add CLOUDINARY_* keys to
+  backend/.env — the app runs fully without them.
+
+  One honest scope note: the owner/admin/customer dashboard pages were generated
+  by parallel sub-agents against the locked API contract and pass the
+  production build, but I'd recommend a quick manual click-through of those
+  dashboards with the dev servers running to confirm every interaction feels
+  right before treating it as final.
