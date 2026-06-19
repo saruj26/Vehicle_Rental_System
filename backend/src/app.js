@@ -20,7 +20,16 @@ app.set('trust proxy', 1);
 app.use(helmet({ crossOriginResourcePolicy: { policy: 'cross-origin' } }));
 app.use(
   cors({
-    origin: env.clientUrl.split(',').map((s) => s.trim()),
+    origin: (origin, callback) => {
+      if (!origin) return callback(null, true);
+      const allowed = env.clientUrl.split(',').map((s) => s.trim());
+      const isVercelPreview = /\.vercel\.app$/.test(origin);
+      if (allowed.includes(origin) || isVercelPreview) {
+        callback(null, true);
+      } else {
+        callback(new Error('Not allowed by CORS'));
+      }
+    },
     credentials: true,
   }),
 );
